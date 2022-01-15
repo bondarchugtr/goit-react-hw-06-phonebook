@@ -4,14 +4,13 @@ import "./index.css";
 import App from "./App";
 import "modern-normalize";
 import store from "./redux/store";
-import { myAction } from "./redux/actions";
-
-console.log(store);
-// console.log(myAction);
+import { Provider } from "react-redux";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store.store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

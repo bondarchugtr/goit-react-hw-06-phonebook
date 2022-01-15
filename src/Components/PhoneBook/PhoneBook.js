@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import s from '../InputPhoneBook/InputPhonebook.module.css';
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "./redux/contacts/actions";
+import { filterContacts, getFilter } from "./redux/contacts/selectors";
 import Form from "../Forma/FormPhonebook";
 import ContactsList from "../PhoneContacts/PhoneContacts";
 import Filter from "../Filter/Filter";
@@ -9,6 +11,10 @@ import useLocalStorage from "../hooks/hooksLocalStorage";
 function PhoneBook() {
   const [contacts, setContacts] = useLocalStorage("contacts", []);
   const [filter, setFilter] = useState("");
+
+  const contact = useSelector(filterContacts);
+  const filters = useSelector(getFilter);
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     const contact = {
@@ -30,7 +36,8 @@ function PhoneBook() {
 
   const delContact = (contactId) => {
     setContacts((prevState) =>
-      contacts.filter((contact) => contact.id !== contactId)
+      // contacts.filter((contact) => contact.id !== contactId)
+      dispatch(actions.deleteContact(contactId))
     );
     window.localStorage.removeItem("contacts");
   };
