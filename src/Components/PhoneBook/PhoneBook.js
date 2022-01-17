@@ -24,7 +24,6 @@ function PhoneBook() {
       dispatch(actions.addContacts([...contacts, { ...contact }]));
     }
   };
-  console.log(contacts);
 
   const availabilityContact = (value) => {
     return contacts.find((el) => el.name === value);

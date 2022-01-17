@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import logger from "redux-logger";
+// import logger from "redux-logger";
+import { createLogger } from "redux-logger";
 import contactsReducer from "../redux/telbook/reducer";
 import {
   persistStore,
@@ -16,14 +17,19 @@ const persistConfig = {
   key: "contacts",
   storage,
 };
-const middleware = (getDefaultMiddleware) => [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-  logger,
-];
+const logger = createLogger();
+let middleware = [];
+if (process.env.NODE_ENV === "development") {
+  middleware = (getDefaultMiddleware) => [
+    ...getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+    logger,
+  ];
+}
+
 const rootReducer = combineReducers({
   contacts: contactsReducer,
 });
