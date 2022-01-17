@@ -4,9 +4,8 @@ export const getFilter = (state) => state.contacts.filter;
 export const filterContacts = createSelector(
   [getContacts, getFilter],
   (contacts, filter) => {
-    const normalizeFilter = filter.toLowerCase();
     return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizeFilter)
+      contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   }
 );

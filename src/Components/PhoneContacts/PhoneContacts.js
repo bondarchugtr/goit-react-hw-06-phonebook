@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import s from './PhoneBook.module.css';
+import React from "react";
+import PropTypes from "prop-types";
+import s from "./PhoneBook.module.css";
 const ContactsList = ({ contacts = [], delContact }) => {
   return (
     <ul className={s.Contact__list}>
-      {contacts.map(el => (
+      {contacts.map((el) => (
         <li key={el.id} className={s.Contact__item}>
           <span>
             {el.name} : {el.number}
@@ -27,7 +27,7 @@ ContactsList.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
-    }),
+    })
   ),
 };
 export default ContactsList;

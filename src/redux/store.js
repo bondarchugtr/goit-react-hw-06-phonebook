@@ -1,10 +1,6 @@
-import {
-  configureStore,
-  combineReducers,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import contactsReducer from "./telbook/reducer";
+import contactsReducer from "../redux/telbook/reducer";
 import {
   persistStore,
   persistReducer,
@@ -20,7 +16,7 @@ const persistConfig = {
   key: "contacts",
   storage,
 };
-const middleware = [
+const middleware = (getDefaultMiddleware) => [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
